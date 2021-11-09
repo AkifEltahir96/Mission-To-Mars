@@ -18,7 +18,7 @@ def scrape_all():
       "news_title": news_title,
       "news_paragraph": news_paragraph,
       "featured_image": featured_image(browser),
-      "facts": mars_facts(),
+      "facts": mars_facts(browser),
       "hemispheres" : hemispheres(browser),
       "last_modified": dt.datetime.now()
     }
@@ -73,7 +73,7 @@ def featured_image(browser):
     # Add try/except for error handling
     try: 
         # find the relative image url
-        img_url_rel = img_soup.fing('img', class_='fancybox-image').get('src')
+        img_url_rel = img_soup.find('img', class_='fancybox-image').get('src')
     except AttributeError:
         return None
     
@@ -137,6 +137,8 @@ def scraping_hemispheres(html_text):
         sample_element = None
     
     hemispheres = {"title": title_element, "img_url": sample_element}
+
+    return hemispheres
 
 if __name__ == '__main__':
     # If running as script, print scraped data
